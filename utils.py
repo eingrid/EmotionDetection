@@ -50,20 +50,12 @@ def build_model(model_name = 'xception'):
             
     """
     if model_name == 'xception': 
-        model = load_model('fer2013_big_XCEPTION.54-0.66.hdf5')
-        model.load_weights('models/bigx_weights')
+        model = load_model('models/xception.h5')
         return model, ['angry', 'disgust', 'fear', 'happy', 'neutral', 'sad', 'surprise'], (64,64)           
  
     elif model_name == 'scratch': 
         model = load_model('models/conv_net')
         return model,['angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral'],(48,48)
-    elif model_name == 'fer': 
-        json_file = open('models/fer.json', 'r')
-        loaded_model_json = json_file.read()
-        json_file.close()
-        model = model_from_json(loaded_model_json)
-        model.load_weights('models/fer.h5')
-        return model,['neutral', 'happiness', 'surprise', 'sadness', 'anger', 'disgust', 'fear'],(48,48)
     else:
         raise NameError('Wrong method_name in get_faces function.')
         
@@ -89,7 +81,7 @@ def draw_faces(model, img, num, method_name, target_size, emotion_labels):
 
       if num % 10 == 0:
         
-        prediction = model.predict(gray2)
+        prediction = model.predict(gray2,verbose=0)
         emotion = emotion_labels[np.argmax(prediction)]
         second_emotion = emotion_labels[np.argsort(np.max(prediction, axis=0))[-2]]
 
