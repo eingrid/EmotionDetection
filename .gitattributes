@@ -1,0 +1,2 @@
+models/** filter=lfs diff=lfs merge=lfs -text
+opencv_detector/** filter=lfs diff=lfs merge=lfs -text
