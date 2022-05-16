@@ -2,8 +2,7 @@ import numpy as np
 
 from retinaface import RetinaFace
 from tensorflow.keras.models import load_model
-from tensorflow.keras.models import model_from_json
-
+from mtcnn import MTCNN
 import cv2 
 
 
@@ -24,13 +23,20 @@ def get_faces(img,method_name = 'opencv'):
         face_cascade = cv2.CascadeClassifier('opencv_detector/haarcascade_frontalface_default.xml')
         faces = face_cascade.detectMultiScale(gray_img, 1.1, 3)
         for x, y, w, h in faces:
-            res.append([x, y, x+w, y+h])
+            if w*h > 5000:
+                res.append([x, y, x+w, y+h])
 
     elif  method_name == 'retinaface':
         faces = RetinaFace.detect_faces(img)
         for face in faces:
           x, y, x2, y2 = faces[face]['facial_area']
           res.append([x, y, x2, y2])
+    elif method_name =='mtcnn':
+        detector = MTCNN()
+        faces = detector.detect_faces(img)
+        for face in faces:
+            x, y, x2, y2 = face['box']
+        res.append([x, y, x+x2, y+y2])
     else:
         raise NameError('Wrong method_name in get_faces function.')
 
@@ -50,7 +56,8 @@ def build_model(model_name = 'xception'):
             
     """
     if model_name == 'xception': 
-        model = load_model('models/xception.h5')
+        model = load_model('models/raw_xception.hdf5')
+        model.load_weights('models/xception.h5')
         return model, ['angry', 'disgust', 'fear', 'happy', 'neutral', 'sad', 'surprise'], (64,64)           
  
     elif model_name == 'scratch': 
