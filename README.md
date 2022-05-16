@@ -15,9 +15,9 @@ Emotion classification metrics
      <td align='center' >Sad</td>
   </tr>
   <tr>
-    <td><img src="example_images/happy_pred.jpg" width=270 height=200></td>
-    <td><img src="example_images/angry_pred.jpg" width=270 height=200></td>
-    <td><img src="example_images/sad_pred.jpg" width=270 height=200></td>
+    <td><img src="https://github.com/eingrid/EmotionDetection/blob/main/example_images/happy_pred.jpg" width=270 height=200></td>
+    <td><img src="https://github.com/eingrid/EmotionDetection/blob/main/example_images/angry_pred.jpg" width=270 height=200></td>
+    <td><img src="https://github.com/eingrid/EmotionDetection/blob/main/example_images/sad_pred.jpg" width=270 height=200></td>
   </tr>
  </table>
 
