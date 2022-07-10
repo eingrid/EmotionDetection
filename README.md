@@ -3,7 +3,7 @@ Real-time face detection and emotion classification using fer2013 dataset, openc
 
 Emotion classification metrics
 -  accuracy ~ 64%
--  top 2 accurasy ~ 81%
+-  top 2 accuracy ~ 81%
 -  cross-entropy loss ~ 1.08
 
 # Examples 
